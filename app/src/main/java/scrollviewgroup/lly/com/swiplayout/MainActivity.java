@@ -28,6 +28,20 @@ public class MainActivity extends AppCompatActivity {
         recyView.setLayoutManager(new LinearLayoutManager(this));
         recyView.setAdapter(new MyAdapter());
         recyView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        recyView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy>0 || dy<0){
+                    SwipeLayoutManager.getInstance().closeCurrentLayout();
+                }
+            }
+        });
         //1.准备数据
         for (int i = 0; i < 30; i++) {
             list.add("name - "+i);
